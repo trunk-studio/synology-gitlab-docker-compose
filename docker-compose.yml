@@ -8,15 +8,15 @@ services:
     volumes:
     - /volume1/docker/mysql:/var/lib/mysql
     env_file: 
-    - .env
+    - ./gitlab.env
   
   gitlab-redis:
     container_name: "gitlab-redis"
     image: sameersbn/redis:latest
     volumes:
-    - /volume1/docker/gitlab:/var/lib/redis
+    - /volume1/docker/redis:/var/lib/redis
     env_file: 
-    - .env
+    - ./gitlab.env
 
   gitlab:
     container_name: "gitlab"
@@ -24,7 +24,7 @@ services:
     volumes:
     - /volume1/docker/gitlab:/home/git/data
     env_file: 
-    - .env
+    - ./gitlab.env
     links:
     - "gitlab-mysql:mysql"
     - "gitlab-redis:redisio"
