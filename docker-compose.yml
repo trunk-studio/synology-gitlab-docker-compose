@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   gitlab-mysql:
     container_name: "gitlab-mysql"
@@ -26,8 +26,8 @@ services:
     env_file: 
     - ./gitlab.env
     links:
-    - "gitlab-mysql:mysql"
-    - "gitlab-redis:redisio"
+    - gitlab-mysql:mysql
+    - gitlab-redis:redisio
     ports:
     - "30001:22" 
     - "30000:80"
