@@ -1,0 +1,33 @@
+version: '2'
+services:
+  gitlab-mysql:
+    container_name: "gitlab-mysql"
+    image: sameersbn/mysql:latest
+    ports:
+    - "3336:3306"
+    volumes:
+    - /volume1/docker/mysql:/var/lib/mysql
+    env_file: 
+    - .env
+  
+  gitlab-redis:
+    container_name: "gitlab-redis"
+    image: sameersbn/redis:latest
+    volumes:
+    - /volume1/docker/gitlab:/var/lib/redis
+    env_file: 
+    - .env
+
+  gitlab:
+    container_name: "gitlab"
+    image: sameersbn/gitlab:10.2.2
+    volumes:
+    - /volume1/docker/gitlab:/home/git/data
+    env_file: 
+    - .env
+    links:
+    - "gitlab-mysql:mysql"
+    - "gitlab-redis:redisio"
+    ports:
+    - "30001:22" 
+    - "30000:80"
