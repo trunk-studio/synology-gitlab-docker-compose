@@ -11,7 +11,7 @@ docker run --name gitlab-redis -d \
     --volume /volume1/docker/redis:/var/lib/redis \
     sameersbn/redis:latest
     
-docker run --name gitlab  \
+docker run --name gitlab -d  \
     --link gitlab-mysql:mysql \
     --link gitlab-redis:redisio \
     --publish 30001:22 --publish 30000:80 \
